@@ -3,196 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLIMATE-WISE MOVEMENT PROJECT</title>
+    <title>Exercise in a Warming World</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-overlay {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        .custom-gradient {
+            background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body>
     <!-- Hero Section -->
-    <header class="relative h-screen flex items-center justify-center">
-        <img src="https://source.unsplash.com/random/1920x1080/?exercise,running" alt="Exercise in heat" class="absolute inset-0 w-full h-full object-cover brightness-50">
-        <div class="relative z-10 text-center text-white px-4">
-            <h1 class="text-5xl font-bold mb-6">CLIMATE-WISE MOVEMENT PROJECT</h1>
-            <p class="text-xl mb-8">Shaping the Future of Exercise in a Warming World</p>
-            <div class="flex justify-center space-x-4">
-                <button onclick="scrollToSection('project')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg transition-colors">
-                    About Project
-                </button>
-                <button onclick="scrollToSection('join')" class="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-full text-lg transition-colors">
-                    Join Study
-                </button>
+    <header class="h-screen relative flex items-center">
+        <div class="absolute inset-0">
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="https://player.vimeo.com/external/485192886.sd.mp4?s=73d518ceb54e4c2a20acf35367d6cdbc51d9f1e5&profile_id=165" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 gradient-overlay"></div>
+        </div>
+        <div class="relative container mx-auto px-4 text-center text-white">
+            <h1 class="text-6xl font-bold mb-8">Exercise in a Warming World</h1>
+            <p class="text-2xl mb-12">Pioneering Climate-Smart Exercise Research</p>
+            <div class="flex justify-center gap-6">
+                <button onclick="scrollToSection('about')" class="bg-white text-blue-900 px-8 py-4 rounded-full text-lg hover-scale">Learn More</button>
+                <button onclick="scrollToSection('join')" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg hover-scale">Join Study</button>
             </div>
         </div>
     </header>
 
-    <!-- Project Section -->
-    <section id="project" class="py-20 bg-white">
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">About the Project</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h3 class="text-2xl font-bold mb-6">Our Mission</h3>
-                    <p class="text-gray-700 mb-6">
-                        Understanding and optimizing exercise in rising temperatures through innovative research and real-world data collection.
-                    </p>
-                </div>
-                <img src="https://source.unsplash.com/random/600x400/?research,science" alt="Project mission" class="rounded-lg shadow-xl">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12">The Future of Exercise</h2>
+                <p class="text-xl text-gray-700 leading-relaxed mb-12">
+                    As our world warms, we're revolutionizing how we understand exercise. Join our research to shape climate-adaptive fitness solutions.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-20 bg-gray-50">
+    <section id="team" class="py-24 custom-gradient text-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">Research Team</h2>
+            <h2 class="text-4xl font-bold mb-16 text-center">Research Team</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Team Member 1 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="text-center">
-                        <img src="https://source.unsplash.com/random/150x150/?person" alt="Dr. Sarah Mitchell" class="w-32 h-32 rounded-full mx-auto mb-4">
-                        <h3 class="font-semibold text-xl">Dr. Sarah Mitchell</h3>
-                        <p class="text-blue-600">Exercise Physiology Expert</p>
-                        <p class="text-gray-600">University of Vienna</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 hover-scale">
+                    <img src="https://source.unsplash.com/random/200x200/?scientist" alt="Team member" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-bold text-center">Dr. Sarah Mitchell</h3>
+                    <p class="text-center opacity-80">Exercise Physiology</p>
                 </div>
-                <!-- Team Member 2 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="text-center">
-                        <img src="https://source.unsplash.com/random/150x150/?scientist" alt="Prof. Dr. Thomas Weber" class="w-32 h-32 rounded-full mx-auto mb-4">
-                        <h3 class="font-semibold text-xl">Prof. Dr. Thomas Weber</h3>
-                        <p class="text-blue-600">Sports Psychology Lead</p>
-                        <p class="text-gray-600">Medical University of Graz</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 hover-scale">
+                    <img src="https://source.unsplash.com/random/201x201/?researcher" alt="Team member" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-bold text-center">Prof. Thomas Weber</h3>
+                    <p class="text-center opacity-80">Climate Science</p>
                 </div>
-                <!-- Team Member 3 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <div class="text-center">
-                        <img src="https://source.unsplash.com/random/150x150/?researcher" alt="Dr. Lisa Müller" class="w-32 h-32 rounded-full mx-auto mb-4">
-                        <h3 class="font-semibold text-xl">Dr. Lisa Müller</h3>
-                        <p class="text-blue-600">Environmental Analysis Lead</p>
-                        <p class="text-gray-600">Technical University of Vienna</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 hover-scale">
+                    <img src="https://source.unsplash.com/random/202x202/?doctor" alt="Team member" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-xl font-bold text-center">Dr. Lisa Müller</h3>
+                    <p class="text-center opacity-80">Sports Medicine</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Join Study Section with FAQ -->
-    <section id="join" class="py-20 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">Join the Study</h2>
+    <!-- Join Section -->
+    <section id="join" class="py-24 bg-gray-50">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold mb-16 text-center">Join Our Study</h2>
             
-            <div class="max-w-3xl mx-auto">
-                <!-- FAQ Items -->
-                <div class="faq-item mb-4">
-                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                        <span class="font-semibold text-lg">Am I eligible to participate?</span>
-                        <i class="fas fa-chevron-down"></i>
+            <div class="space-y-4">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <button class="faq-button w-full px-6 py-4 text-left font-semibold flex justify-between items-center">
+                        <span>Am I eligible?</span>
+                        <i class="fas fa-plus"></i>
                     </button>
-                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
-                        <p class="mb-2">• Age between 18-55 years</p>
-                        <p class="mb-2">• Living in Austria</p>
-                        <p class="mb-2">• Regularly exercise outdoors (minimum 150 minutes/week)</p>
-                        <p class="mb-2">• No cardiovascular conditions</p>
-                        <p class="mb-2">• Own a smartphone (iOS or Android)</p>
+                    <div class="faq-answer hidden px-6 py-4 bg-gray-50">
+                        <ul class="space-y-2">
+                            <li>• Age: 18-55 years</li>
+                            <li>• Location: Austria</li>
+                            <li>• Regular outdoor exercise</li>
+                            <li>• No cardiovascular conditions</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="faq-item mb-4">
-                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                        <span class="font-semibold text-lg">What will I be asked to do?</span>
-                        <i class="fas fa-chevron-down"></i>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <button class="faq-button w-full px-6 py-4 text-left font-semibold flex justify-between items-center">
+                        <span>What's involved?</span>
+                        <i class="fas fa-plus"></i>
                     </button>
-                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
-                        <p class="mb-2">• Wear provided activity trackers during outdoor exercise</p>
-                        <p class="mb-2">• Complete brief daily surveys about your exercise experience</p>
-                        <p class="mb-2">• Continue your regular outdoor exercise routine</p>
-                        <p class="mb-2">• Share basic health and demographic information</p>
+                    <div class="faq-answer hidden px-6 py-4 bg-gray-50">
+                        <ul class="space-y-2">
+                            <li>• One month participation (August 2025)</li>
+                            <li>• Wear activity trackers</li>
+                            <li>• Complete brief surveys</li>
+                            <li>• Regular outdoor exercise</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="faq-item mb-4">
-                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                        <span class="font-semibold text-lg">How long will the study last?</span>
-                        <i class="fas fa-chevron-down"></i>
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <button class="faq-button w-full px-6 py-4 text-left font-semibold flex justify-between items-center">
+                        <span>Benefits?</span>
+                        <i class="fas fa-plus"></i>
                     </button>
-                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
-                        <p class="mb-2">The study runs for one month (August 2025). You'll be asked to:</p>
-                        <p class="mb-2">• Initial setup meeting (30 minutes)</p>
-                        <p class="mb-2">• Daily activity tracking (during your regular exercise)</p>
-                        <p class="mb-2">• Brief daily surveys (5 minutes)</p>
-                        <p class="mb-2">• Final wrap-up meeting (30 minutes)</p>
+                    <div class="faq-answer hidden px-6 py-4 bg-gray-50">
+                        <ul class="space-y-2">
+                            <li>• €100 compensation</li>
+                            <li>• Personalized fitness insights</li>
+                            <li>• Advanced tracking devices</li>
+                            <li>• Contributing to research</li>
+                        </ul>
                     </div>
                 </div>
+            </div>
 
-                <div class="faq-item mb-4">
-                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                        <span class="font-semibold text-lg">Will I be compensated for participating?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
-                        <p class="mb-2">• €100 compensation upon study completion</p>
-                        <p class="mb-2">• Personalized exercise and health insights report</p>
-                        <p class="mb-2">• Free use of advanced fitness tracking devices during the study</p>
-                        <p class="mb-2">• Contributing to important climate and health research</p>
-                    </div>
-                </div>
-
-                <div class="faq-item mb-4">
-                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
-                        <span class="font-semibold text-lg">What happens to the data you collect?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
-                        <p class="mb-2">• All data is anonymized and stored securely</p>
-                        <p class="mb-2">• Used only for research purposes</p>
-                        <p class="mb-2">• Compliant with GDPR regulations</p>
-                        <p class="mb-2">• You can request your data deletion at any time</p>
-                        <p class="mb-2">• You'll receive a copy of your personal data</p>
-                    </div>
-                </div>
-
-                <div class="mt-12 text-center bg-blue-50 rounded-xl p-8">
-                    <h3 class="text-xl font-bold mb-4">Ready to Join?</h3>
-                    <button class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg hover:bg-blue-700 transition-colors">
-                        Register Interest
-                    </button>
-                    <p class="mt-4 text-sm text-gray-600">
-                        Email: study@institute.at<br>
-                        Phone: +43 123 456 789
-                    </p>
-                </div>
+            <div class="mt-16 text-center">
+                <a href="mailto:study@institute.at" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg hover-scale">
+                    Register Interest
+                </a>
+                <p class="mt-4 text-gray-600">
+                    Contact: study@institute.at | +43 123 456 789
+                </p>
             </div>
         </div>
     </section>
 
     <script>
-        // Smooth scrolling
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // FAQ functionality
-        document.querySelectorAll('.faq-item').forEach(item => {
-            const button = item.querySelector('button');
-            const answer = item.querySelector('.faq-answer');
-            const icon = item.querySelector('i');
-
+        document.querySelectorAll('.faq-button').forEach(button => {
             button.addEventListener('click', () => {
-                const isOpen = answer.classList.contains('hidden');
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
                 
-                // Close all other answers
-                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
-                document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
-                
-                // Toggle current answer
-                if (isOpen) {
-                    answer.classList.remove('hidden');
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    answer.classList.add('hidden');
-                    icon.style.transform = 'rotate(0deg)';
-                }
+                document.querySelectorAll('.faq-answer').forEach(a => {
+                    if (a !== answer) a.classList.add('hidden');
+                });
+                document.querySelectorAll('.faq-button i').forEach(i => {
+                    if (i !== icon) i.className = 'fas fa-plus';
+                });
+
+                answer.classList.toggle('hidden');
+                icon.className = answer.classList.contains('hidden') ? 'fas fa-plus' : 'fas fa-minus';
             });
         });
     </script>
