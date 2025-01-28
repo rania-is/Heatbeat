@@ -110,6 +110,40 @@
         .contact-section {
             background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
         }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 70%;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 50;
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .desktop-menu {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -124,14 +158,29 @@
             <span class="text-white text-xl md:text-2xl font-bold">HeatBeat</span>
         </div>
         
-        <!-- Navigation Panel -->
-        <nav class="absolute top-4 right-0 p-4 flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-8 z-20">
-            <div class="flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-8">
-                <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
-                <a href="#team" class="text-white hover:text-[#c1121f] transition-colors">Team</a>
-                <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
-                <a href="#join" class="btn-primary px-4 py-2 rounded-full transition-colors">Join Study</a>
+        <!-- Navigation -->
+        <button class="hamburger absolute top-6 right-4 z-30 p-2">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+            </svg>
+        </button>
+
+        <!-- Mobile Menu -->
+        <nav class="mobile-menu z-40">
+            <div class="flex flex-col space-y-6">
+                <a href="#project" class="text-white hover:text-[#c1121f] transition-colors text-lg">About</a>
+                <a href="#team" class="text-white hover:text-[#c1121f] transition-colors text-lg">Team</a>
+                <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors text-lg">Contact Us</a>
+                <a href="#join" class="btn-primary px-4 py-2 rounded-full text-lg text-center">Join Study</a>
             </div>
+        </nav>
+
+        <!-- Desktop Menu -->
+        <nav class="desktop-menu absolute top-4 right-0 p-4 flex items-center space-x-8 z-20">
+            <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
+            <a href="#team" class="text-white hover:text-[#c1121f] transition-colors">Team</a>
+            <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
+            <a href="#join" class="btn-primary px-4 py-2 rounded-full transition-colors">Join Study</a>
         </nav>
 
         <div class="absolute inset-0 w-full h-full">
@@ -400,6 +449,24 @@
                     answer.classList.add('hidden');
                     icon.style.transform = 'rotate(0deg)';
                 }
+            });
+        });
+
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            hamburger.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
             });
         });
     </script>
