@@ -10,22 +10,105 @@
         .btn-primary {
             background-color: #c1121f;
             color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         .btn-primary:hover {
             background-color: #780000;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
         }
         .btn-secondary {
             background-color: white;
             color: #c1121f;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
         .btn-secondary:hover {
             background-color: #f8f8f8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
         }
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .gradient-overlay {
             background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+        }
+        .section-title {
+            color: #2d3748;
+            font-weight: bold;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 3rem;
+            display: inline-block;
+            transform: none;
+            left: auto;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #c1121f;
+            border-radius: 2px;
+        }
+        .title-container {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .section-warm {
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-warm::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(193, 18, 31, 0.1), transparent);
+        }
+        .section-cool {
+            background-color: #f8fafc;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-cool::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(193, 18, 31, 0.1), transparent);
+        }
+        .highlight-text {
+            color: #c1121f;
+        }
+        .team-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .faq-item button {
+            transition: all 0.3s ease;
+        }
+        .faq-item button:hover {
+            background-color: #f1f5f9;
+        }
+        .contact-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
         }
     </style>
 </head>
@@ -36,13 +119,13 @@
         <div class="absolute top-0 left-0 w-full h-32 bg-black bg-opacity-30 z-10"></div>
         
         <!-- Logo and Project Name -->
-        <div class="absolute -top-6 left-0 p-4 flex items-center z-20">
-            <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-40 w-auto -mr-4">
-            <span class="text-white text-2xl font-bold">HeatBeat</span>
+        <div class="absolute top-0 left-0 p-4 flex items-center z-20">
+            <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-20 md:h-40 w-auto -mr-4">
+            <span class="text-white text-xl md:text-2xl font-bold">HeatBeat</span>
         </div>
         
         <!-- Navigation Panel -->
-        <nav class="absolute top-8 right-0 p-4 flex items-center space-x-8 z-20">
+        <nav class="absolute top-4 right-0 p-4 flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-8 z-20">
             <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
             <a href="#team" class="text-white hover:text-[#c1121f] transition-colors">Team</a>
             <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
@@ -53,14 +136,14 @@
             <div class="absolute inset-0 gradient-overlay z-10"></div>
             <img src="back3.jpg" alt="Background Image" class="w-full h-full object-cover opacity-95 brightness-125">
         </div>
-        <div class="relative z-10 text-center text-white px-4">
-            <h1 class="text-5xl font-bold mb-6 text-shadow">CLIMATE-WISE EXERCISE PROJECT</h1>
-            <p class="text-xl mb-8 text-shadow">Shaping the Future of Exercise in a Warming World</p>
-            <div class="flex justify-center space-x-4">
-                <button onclick="scrollToSection('project')" class="btn-secondary px-8 py-3 rounded-full text-lg transition-colors">
+        <div class="relative z-10 text-center text-white px-4 mt-16 md:mt-0">
+            <h1 class="text-3xl md:text-5xl font-bold mb-6 text-shadow">CLIMATE-WISE EXERCISE PROJECT</h1>
+            <p class="text-lg md:text-xl mb-8 text-shadow">Shaping the Future of Exercise in a Warming World</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <button onclick="scrollToSection('project')" class="btn-secondary px-6 md:px-8 py-3 rounded-full text-lg transition-colors">
                     About Project
                 </button>
-                <button onclick="scrollToSection('join')" class="btn-primary px-8 py-3 rounded-full text-lg transition-colors">
+                <button onclick="scrollToSection('join')" class="btn-primary px-6 md:px-8 py-3 rounded-full text-lg transition-colors">
                     Join Study
                 </button>
             </div>
@@ -68,9 +151,11 @@
     </header>
 
     <!-- Project Section -->
-    <section id="project" class="py-20 bg-white">
+    <section id="project" class="py-20 section-warm">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">About the Project</h2>
+            <div class="title-container">
+                <h2 class="text-3xl section-title">About the Project</h2>
+            </div>
             <div class="grid md:grid-cols-2 gap-12">
                 <div class="space-y-8">
                     <div>
@@ -105,12 +190,14 @@
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-20 bg-gray-50">
+    <section id="team" class="py-20 section-cool">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">Research Team</h2>
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="title-container">
+                <h2 class="text-3xl section-title">Research Team</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Team Member 1 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6">
                     <div class="text-center">
                         <img src="rania.png" alt="Dr. Rania Islambouli" class="w-32 h-32 rounded-full mx-auto mb-4">
                         <h3 class="font-semibold text-xl">Dr. Rania Islambouli</h3>
@@ -119,7 +206,7 @@
                     </div>
                 </div>
                 <!-- Team Member 2 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6">
                     <div class="text-center">
                         <img src="https://source.unsplash.com/random/150x150/?scientist" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
                         <h3 class="font-semibold text-xl">XX</h3>
@@ -128,7 +215,7 @@
                     </div>
                 </div>
                 <!-- Team Member 3 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6">
                     <div class="text-center">
                         <img src="https://source.unsplash.com/random/150x150/?researcher" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
                         <h3 class="font-semibold text-xl">XX</h3>
@@ -137,7 +224,7 @@
                     </div>
                 </div>
                 <!-- Team Member 4 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6">
                     <div class="text-center">
                         <img src="https://source.unsplash.com/random/150x150/?professor" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
                         <h3 class="font-semibold text-xl">XX</h3>
@@ -146,7 +233,7 @@
                     </div>
                 </div>
                 <!-- Team Member 5 -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="team-card bg-white rounded-xl shadow-lg p-6">
                     <div class="text-center">
                         <img src="https://source.unsplash.com/random/150x150/?doctor" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
                         <h3 class="font-semibold text-xl">XX</h3>
@@ -159,9 +246,11 @@
     </section>
 
     <!-- Join Study Section with FAQ -->
-    <section id="join" class="py-20 bg-white">
+    <section id="join" class="py-20 section-warm">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6 text-center">Join the Study</h2>
+            <div class="title-container">
+                <h2 class="text-3xl section-title">Join the Study</h2>
+            </div>
             
             <p class="text-gray-700 text-center max-w-3xl mx-auto mb-12 text-lg">
                 By participating in this study, you're contributing to important research that will help shape how we exercise in a changing climate. Together, we can find better ways to keep people moving safely and confidently, regardless of the temperature outside.
@@ -245,19 +334,17 @@
                     <button class="btn-primary px-8 py-3 rounded-full text-lg transition-colors">
                         Sign Up
                     </button>
-                    <p class="mt-4 text-sm text-gray-600">
-                        Email: study@institute.at<br>
-                        Phone: +43 123 456 789
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50">
+    <section id="contact" class="py-20 contact-section">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center">Contact Us</h2>
+            <div class="title-container">
+                <h2 class="text-3xl section-title">Contact Us</h2>
+            </div>
             <div class="max-w-3xl mx-auto text-center">
                 <p class="text-gray-700 mb-4">For any questions about the study, please reach out to us at:</p>
                 <p class="text-gray-700 text-lg">
