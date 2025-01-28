@@ -126,10 +126,12 @@
         
         <!-- Navigation Panel -->
         <nav class="absolute top-4 right-0 p-4 flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-8 z-20">
-            <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
-            <a href="#team" class="text-white hover:text-[#c1121f] transition-colors">Team</a>
-            <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
-            <a href="#join" class="btn-primary px-4 py-2 rounded-full transition-colors">Join Study</a>
+            <div class="flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-8">
+                <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
+                <a href="#team" class="text-white hover:text-[#c1121f] transition-colors">Team</a>
+                <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
+                <a href="#join" class="btn-primary px-4 py-2 rounded-full transition-colors">Join Study</a>
+            </div>
         </nav>
 
         <div class="absolute inset-0 w-full h-full">
@@ -357,14 +359,16 @@
 
     <!-- Footer Ribbon -->
     <footer class="relative bg-black bg-opacity-20 py-6">
-        <div class="container mx-auto px-4 flex items-center">
-            <div class="flex items-center">
-                <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-40 w-auto -mr-4">
-                <span class="text-white text-2xl font-bold">HeatBeat</span>
-            </div>
-            <div class="ml-auto flex items-center space-x-6">
-                <img src="lbi.svg" alt="LBI Logo" class="h-16 w-auto">
-                <img src="plus.png" alt="Plus Logo" class="h-16 w-auto">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                <div class="flex items-center">
+                    <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-40 w-auto -mr-4">
+                    <span class="text-white text-2xl font-bold">HeatBeat</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <img src="lbi.svg" alt="LBI Logo" class="h-16 w-auto">
+                    <img src="plus.png" alt="Plus Logo" class="h-16 w-auto">
+                </div>
             </div>
         </div>
     </footer>
