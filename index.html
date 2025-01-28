@@ -3,166 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise in a Warming World</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <title>CLIMATE-WISE Exercise PROJECT</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        .btn-primary {
+            background-color: #c1121f;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #780000;
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #c1121f;
+        }
+        .btn-secondary:hover {
+            background-color: #f8f8f8;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
         .gradient-overlay {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
-        }
-        .hover-scale {
-            transition: transform 0.3s ease;
-        }
-        .hover-scale:hover {
-            transform: scale(1.05);
-        }
-        .custom-gradient {
-            background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50">
     <!-- Hero Section -->
-    <header class="h-screen relative flex items-center">
-        <div class="absolute inset-0">
-            <video autoplay muted loop class="w-full h-full object-cover">
-                <source src="https://player.vimeo.com/external/485192886.sd.mp4?s=73d518ceb54e4c2a20acf35367d6cdbc51d9f1e5&profile_id=165" type="video/mp4">
-            </video>
-            <div class="absolute inset-0 gradient-overlay"></div>
+    <header class="relative h-screen flex items-center justify-center bg-black">
+        <!-- Background Ribbon -->
+        <div class="absolute top-0 left-0 w-full h-32 bg-black bg-opacity-30 z-10"></div>
+        
+        <!-- Logo and Project Name -->
+        <div class="absolute -top-6 left-0 p-4 flex items-center z-20">
+            <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-40 w-auto -mr-4">
+            <span class="text-white text-2xl font-bold">HeatBeat</span>
         </div>
-        <div class="relative container mx-auto px-4 text-center text-white">
-            <h1 class="text-6xl font-bold mb-8">Exercise in a Warming World</h1>
-            <p class="text-2xl mb-12">Pioneering Climate-Smart Exercise Research</p>
-            <div class="flex justify-center gap-6">
-                <button onclick="scrollToSection('about')" class="bg-white text-blue-900 px-8 py-4 rounded-full text-lg hover-scale">Learn More</button>
-                <button onclick="scrollToSection('join')" class="bg-blue-600 text-white px-8 py-4 rounded-full text-lg hover-scale">Join Study</button>
+        
+        <!-- Navigation Panel -->
+        <nav class="absolute top-8 right-0 p-4 flex items-center space-x-8 z-20">
+            <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
+            <a href="#team" class="text-white hover:text-[#c1121f] transition-colors">Team</a>
+            <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
+            <a href="#join" class="btn-primary px-4 py-2 rounded-full transition-colors">Join Study</a>
+        </nav>
+
+        <div class="absolute inset-0 w-full h-full">
+            <div class="absolute inset-0 gradient-overlay z-10"></div>
+            <img src="back3.jpg" alt="Background Image" class="w-full h-full object-cover opacity-95 brightness-125">
+        </div>
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-5xl font-bold mb-6 text-shadow">CLIMATE-WISE EXERCISE PROJECT</h1>
+            <p class="text-xl mb-8 text-shadow">Shaping the Future of Exercise in a Warming World</p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="scrollToSection('project')" class="btn-secondary px-8 py-3 rounded-full text-lg transition-colors">
+                    About Project
+                </button>
+                <button onclick="scrollToSection('join')" class="btn-primary px-8 py-3 rounded-full text-lg transition-colors">
+                    Join Study
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-white">
+    <!-- Project Section -->
+    <section id="project" class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center">
-                <h2 class="text-4xl font-bold mb-12">The Future of Exercise</h2>
-                <p class="text-xl text-gray-700 leading-relaxed mb-12">
-                    As our world warms, we're revolutionizing how we understand exercise. Join our research to shape climate-adaptive fitness solutions.
-                </p>
+            <h2 class="text-3xl font-bold mb-12 text-center">About the Project</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">The Challenge</h3>
+                        <p class="text-gray-700 text-justify">
+                            Have you noticed how your regular running route feels harder on hot days? Or how your usual workout leaves you more exhausted during summer? You're not alone. As our climate changes, we need to adapt how we stay active - but current fitness apps and training programs haven't caught up with this new reality.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">The Reality</h3>
+                        <p class="text-gray-700 text-justify">
+                            Our warming world isn't just changing the environment - it's transforming how our bodies respond to exercise. When you exercise in heat, your body faces a double challenge: managing the stress from the workout itself while also trying to keep cool. Yet most fitness technology treats every day the same, regardless of the temperature outside.
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">Our Research</h3>
+                        <p class="text-gray-700 text-justify">
+                            The HeatBeat project studies how environmental heat affects exercise performance. We combine multiple aspects of exercise science: physiological monitoring, environmental factors, and contextual elements. Our research focuses on real-world exercise situations, not just laboratory conditions, because we know that's where the real challenge lies.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">The Vision</h3>
+                        <p class="text-gray-700 text-justify">
+                            Our research examines the relationship between heat stress and exercise to develop better activity guidelines for warmer conditions. The findings will contribute to more effective exercise recommendations that consider both environmental conditions and personal factors.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="py-24 custom-gradient text-white">
+    <section id="team" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-16 text-center">Research Team</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center">Research Team</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass-card rounded-xl p-6 hover-scale">
-                    <img src="https://source.unsplash.com/random/200x200/?scientist" alt="Team member" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h3 class="text-xl font-bold text-center">Dr. Sarah Mitchell</h3>
-                    <p class="text-center opacity-80">Exercise Physiology</p>
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-center">
+                        <img src="rania.png" alt="Dr. Rania Islambouli" class="w-32 h-32 rounded-full mx-auto mb-4">
+                        <h3 class="font-semibold text-xl">Dr. Rania Islambouli</h3>
+                        <p class="text-blue-600">PostDoc Researcher</p>
+                        <p class="text-gray-600">LBI for Digital Health and Prevention</p>
+                    </div>
                 </div>
-                <div class="glass-card rounded-xl p-6 hover-scale">
-                    <img src="https://source.unsplash.com/random/201x201/?researcher" alt="Team member" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h3 class="text-xl font-bold text-center">Prof. Thomas Weber</h3>
-                    <p class="text-center opacity-80">Climate Science</p>
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-center">
+                        <img src="https://source.unsplash.com/random/150x150/?scientist" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
+                        <h3 class="font-semibold text-xl">XX</h3>
+                        <p class="text-blue-600">XX</p>
+                        <p class="text-gray-600">XX</p>
+                    </div>
                 </div>
-                <div class="glass-card rounded-xl p-6 hover-scale">
-                    <img src="https://source.unsplash.com/random/202x202/?doctor" alt="Team member" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h3 class="text-xl font-bold text-center">Dr. Lisa Müller</h3>
-                    <p class="text-center opacity-80">Sports Medicine</p>
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-center">
+                        <img src="https://source.unsplash.com/random/150x150/?researcher" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
+                        <h3 class="font-semibold text-xl">XX</h3>
+                        <p class="text-blue-600">XX</p>
+                        <p class="text-gray-600">XX</p>
+                    </div>
+                </div>
+                <!-- Team Member 4 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-center">
+                        <img src="https://source.unsplash.com/random/150x150/?professor" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
+                        <h3 class="font-semibold text-xl">XX</h3>
+                        <p class="text-blue-600">XX</p>
+                        <p class="text-gray-600">XX</p>
+                    </div>
+                </div>
+                <!-- Team Member 5 -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-center">
+                        <img src="https://source.unsplash.com/random/150x150/?doctor" alt="XX" class="w-32 h-32 rounded-full mx-auto mb-4">
+                        <h3 class="font-semibold text-xl">XX</h3>
+                        <p class="text-blue-600">XX</p>
+                        <p class="text-gray-600">XX</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Join Section -->
-    <section id="join" class="py-24 bg-gray-50">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <h2 class="text-4xl font-bold mb-16 text-center">Join Our Study</h2>
+    <!-- Join Study Section with FAQ -->
+    <section id="join" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6 text-center">Join the Study</h2>
             
-            <div class="space-y-4">
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <button class="faq-button w-full px-6 py-4 text-left font-semibold flex justify-between items-center">
-                        <span>Am I eligible?</span>
-                        <i class="fas fa-plus"></i>
+            <p class="text-gray-700 text-center max-w-3xl mx-auto mb-12 text-lg">
+                By participating in this study, you're contributing to important research that will help shape how we exercise in a changing climate. Together, we can find better ways to keep people moving safely and confidently, regardless of the temperature outside.
+            </p>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Items -->
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">Am I eligible to participate?</span>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="faq-answer hidden px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li>• Age: 18-55 years</li>
-                            <li>• Location: Austria</li>
-                            <li>• Regular outdoor exercise</li>
-                            <li>• No cardiovascular conditions</li>
-                        </ul>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">To join this study, you need to be:</p>
+                        <p class="mb-2">• At least 18 years old</p>
+                        <p class="mb-2">• Residing in Europe</p>
+                        <p class="mb-2">• Proficient in English</p>
+                        <p class="mb-2">• Have a Garmin watch</p>
+                        <p class="mb-2">• Have a smartphone (iOS or Android)</p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <button class="faq-button w-full px-6 py-4 text-left font-semibold flex justify-between items-center">
-                        <span>What's involved?</span>
-                        <i class="fas fa-plus"></i>
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What's involved?</span>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="faq-answer hidden px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li>• One month participation (August 2025)</li>
-                            <li>• Wear activity trackers</li>
-                            <li>• Complete brief surveys</li>
-                            <li>• Regular outdoor exercise</li>
-                        </ul>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">• Respond to daily surveys (<1 minute each)</p>
+                        <p class="mb-2">• Share data from your smartphone</p>
+                        <p class="mb-2">• Share data from your Garmin smartwatch</p>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                    <button class="faq-button w-full px-6 py-4 text-left font-semibold flex justify-between items-center">
-                        <span>Benefits?</span>
-                        <i class="fas fa-plus"></i>
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">How long will the study last?</span>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="faq-answer hidden px-6 py-4 bg-gray-50">
-                        <ul class="space-y-2">
-                            <li>• €100 compensation</li>
-                            <li>• Personalized fitness insights</li>
-                            <li>• Advanced tracking devices</li>
-                            <li>• Contributing to research</li>
-                        </ul>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">The study runs from August 1st to August 31st, 2025.</p>
                     </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What will I receive?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">By participating, you'll be advancing research on exercise in our changing climate. At the end of the study, you'll receive a detailed report showing your personal exercise patterns and how environmental conditions affect your performance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What about data privacy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">We take your privacy seriously:</p>
+                        <p class="mb-2">• All data is anonymized and stored securely</p>
+                        <p class="mb-2">• Compliant with GDPR regulations</p>
+                        <p class="mb-2">• Used only for research purposes</p>
+                        <p class="mb-2">• You can drop out of the study and request data deletion at any time</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What if I change my mind?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">Participation in this research is completely voluntary. You can withdraw from the study at any time, request deletion of your data, and face no negative consequences for doing so.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center bg-gray-50 rounded-xl p-8">
+                    <h3 class="text-xl font-bold mb-4">Ready to Join?</h3>
+                    <button class="btn-primary px-8 py-3 rounded-full text-lg transition-colors">
+                        Sign Up
+                    </button>
+                    <p class="mt-4 text-sm text-gray-600">
+                        Email: study@institute.at<br>
+                        Phone: +43 123 456 789
+                    </p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="mt-16 text-center">
-                <a href="mailto:study@institute.at" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-full text-lg hover-scale">
-                    Register Interest
-                </a>
-                <p class="mt-4 text-gray-600">
-                    Contact: study@institute.at | +43 123 456 789
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Contact Us</h2>
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-gray-700 mb-4">For any questions about the study, please reach out to us at:</p>
+                <p class="text-gray-700 text-lg">
+                    <i class="fas fa-envelope mr-2 text-[#c1121f]"></i>
+                    rania.islambouli@dhp.lbg.ac.at
                 </p>
             </div>
         </div>
     </section>
 
+    <!-- Footer Ribbon -->
+    <footer class="relative bg-black bg-opacity-20 py-6">
+        <div class="container mx-auto px-4 flex items-center">
+            <div class="flex items-center">
+                <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-40 w-auto -mr-4">
+                <span class="text-white text-2xl font-bold">HeatBeat</span>
+            </div>
+            <div class="ml-auto flex items-center space-x-6">
+                <img src="lbi.svg" alt="LBI Logo" class="h-16 w-auto">
+                <img src="plus.png" alt="Plus Logo" class="h-16 w-auto">
+            </div>
+        </div>
+    </footer>
+
     <script>
+        // Smooth scrolling
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        document.querySelectorAll('.faq-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const answer = button.nextElementSibling;
-                const icon = button.querySelector('i');
-                
-                document.querySelectorAll('.faq-answer').forEach(a => {
-                    if (a !== answer) a.classList.add('hidden');
-                });
-                document.querySelectorAll('.faq-button i').forEach(i => {
-                    if (i !== icon) i.className = 'fas fa-plus';
-                });
+        // FAQ functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const button = item.querySelector('button');
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('i');
 
-                answer.classList.toggle('hidden');
-                icon.className = answer.classList.contains('hidden') ? 'fas fa-plus' : 'fas fa-minus';
+            button.addEventListener('click', () => {
+                const isOpen = answer.classList.contains('hidden');
+                
+                // Close all other answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+                document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
+                
+                // Toggle current answer
+                if (isOpen) {
+                    answer.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    answer.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
             });
         });
     </script>
