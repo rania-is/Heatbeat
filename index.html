@@ -187,6 +187,30 @@
         .close-modal:hover {
             color: #000;
         }
+
+        .loading {
+            position: relative;
+            opacity: 0.8;
+            cursor: wait;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -605,64 +629,119 @@
         // Modal functionality
         document.addEventListener('DOMContentLoaded', function() {
             const modal = document.getElementById('signUpModal');
+            const modalContent = modal.querySelector('.modal-content');
             const signUpButtons = document.querySelectorAll('.btn-primary');
             const closeModal = document.querySelector('.close-modal');
             const form = document.getElementById('signUpForm');
+            
+            // Store the initial form HTML for resetting
+            const initialFormHTML = modalContent.innerHTML;
 
             signUpButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     if (button.textContent.trim().includes('Sign Up')) {
+                        // Reset modal content before showing
+                        modalContent.innerHTML = initialFormHTML;
                         modal.classList.add('active');
+                        
+                        // Reattach submit event listener to new form
+                        const newForm = modalContent.querySelector('#signUpForm');
+                        attachFormSubmitHandler(newForm);
                     }
                 });
             });
 
             closeModal.addEventListener('click', () => {
                 modal.classList.remove('active');
+                // Reset modal content after it's closed
+                setTimeout(() => {
+                    modalContent.innerHTML = initialFormHTML;
+                }, 300);
             });
 
             window.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.classList.remove('active');
+                    // Reset modal content after it's closed
+                    setTimeout(() => {
+                        modalContent.innerHTML = initialFormHTML;
+                    }, 300);
                 }
             });
 
-            form.addEventListener('submit', e => {
-                e.preventDefault();
-                
-                // Get form data
-                const formData = {
-                    timestamp: new Date().toISOString(),
-                    name: form.name.value,
-                    email: form.email.value,
-                    age: form.age.value,
-                    country: form.country.value,
-                    garmin: form.garmin.value,
-                    smartphone: form.smartphone.value,
-                    english: form.english.value,
-                    participate: form.participate.value
-                };
+            function attachFormSubmitHandler(form) {
+                form.addEventListener('submit', async e => {
+                    e.preventDefault();
+                    
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.classList.add('loading');
+                    submitButton.textContent = 'Submitting...';
+                    
+                    const formData = {
+                        timestamp: new Date().toISOString(),
+                        name: form.name.value,
+                        email: form.email.value,
+                        age: form.age.value,
+                        country: form.country.value,
+                        garmin: form.garmin.value,
+                        smartphone: form.smartphone.value,
+                        english: form.english.value,
+                        participate: form.participate.value
+                    };
 
-                // Send to Google Sheets
-                fetch('https://script.google.com/macros/s/AKfycby4DNe5nqHu7ziBjtCr6aHSbSeySApwJsD-6ViVI0yvLrg34V4MkwR5VKbnwXDc8ZvyMA/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    cache: 'no-cache',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                })
-                .then(() => {
-                    alert('Thank you for your application! We will contact you soon.');
-                    modal.classList.remove('active');
-                    form.reset();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('There was an error submitting your application. Please try again.');
+                    try {
+                        await fetch('https://script.google.com/macros/s/AKfycby4DNe5nqHu7ziBjtCr6aHSbSeySApwJsD-6ViVI0yvLrg34V4MkwR5VKbnwXDc8ZvyMA/exec', {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            cache: 'no-cache',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(formData)
+                        });
+
+                        // Replace form with success message
+                        modalContent.innerHTML = `
+                            <span class="close-modal">&times;</span>
+                            <div class="text-center py-8">
+                                <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Thank you for your interest in participating in our study!</h2>
+                                <p class="text-gray-600">We will contact you soon.</p>
+                            </div>
+                        `;
+
+                        // Add event listener to new close button
+                        const newCloseButton = modalContent.querySelector('.close-modal');
+                        newCloseButton.addEventListener('click', () => {
+                            modal.classList.remove('active');
+                            // Reset modal content after it's closed
+                            setTimeout(() => {
+                                modalContent.innerHTML = initialFormHTML;
+                            }, 300);
+                        });
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                        modalContent.innerHTML = `
+                            <span class="close-modal">&times;</span>
+                            <div class="text-center py-8">
+                                <svg class="w-16 h-16 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Submission Error</h2>
+                                <p class="text-gray-600">There was an error submitting your application.</p>
+                                <p class="text-gray-600 mt-2">Please try again later.</p>
+                            </div>
+                        `;
+                    }
                 });
-            });
+            }
+
+            // Attach submit handler to initial form
+            attachFormSubmitHandler(form);
         });
     </script>
 </body>
