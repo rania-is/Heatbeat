@@ -296,7 +296,7 @@
                     <div>
                         <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">Our Research</h3>
                         <p class="text-gray-700 text-justify">
-                            The HeatBeat project, a collaboration between the Ludwig Boltzmann Institute for Digital Health and Prevention (LBI) and Paris Lodron University Salzburg (PLUS), studies how environmental heat affects exercise performance. We combine multiple aspects of exercise science: physiological monitoring, environmental factors, and contextual elements. Our research focuses on real-world exercise situations, not just laboratory conditions, because we know that's where the real challenge lies.
+                            The HeatBeat project, a collaboration between the <a href="https://lbg.ac.at/?lang=en" target="_blank" class="text-blue-600 hover:underline">Ludwig Boltzmann Institute for Digital Health and Prevention (LBI)</a> and <a href="https://www.plus.ac.at/?lang=en" target="_blank" class="text-blue-600 hover:underline">Paris Lodron University Salzburg (PLUS)</a>, studies how environmental heat affects exercise performance. We combine multiple aspects of exercise science: physiological monitoring, environmental factors, and contextual elements. Our research focuses on real-world exercise situations, not just laboratory conditions, because we know that's where the real challenge lies.
                         </p>
                     </div>
                     <div>
@@ -394,12 +394,12 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
-                        <p class="mb-2">To join this study, you need to be:</p>
-                        <p class="mb-2">• At least 18 years old</p>
-                        <p class="mb-2">• Residing in Europe</p>
-                        <p class="mb-2">• Proficient in English</p>
-                        <p class="mb-2">• Have a Garmin watch</p>
-                        <p class="mb-2">• Have a smartphone (iOS or Android)</p>
+                        <p class="mb-2">You are eligible if you:</p>
+                        <p class="mb-2">• Are at least 18 years old</p>
+                        <p class="mb-2">• Live in Europe</p>
+                        <p class="mb-2">• Are proficient in English</p>
+                        <p class="mb-2">• Own a Garmin watch</p>
+                        <p class="mb-2">• Own a smartphone (iOS or Android)</p>
                     </div>
                 </div>
 
@@ -505,7 +505,10 @@
     <div id="signUpModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2 class="text-2xl font-bold mb-6 text-center">Sign Up for the Study</h2>
+            <h2 class="text-2xl font-bold mb-4 text-center">Sign Up for the Study</h2>
+            <p class="text-gray-700 mb-6 text-sm">
+                If you are interested in participating in our study, please enter your details and relevant information below and we will contact you with more details. Data that you enter in this form will be handled in accordance with the <a href="https://lbg.ac.at/data-protection/?lang=en" target="_blank" class="text-blue-600 hover:underline">Data Protection Policy of the LBG</a> and will be stored for reporting purposes for up to three years.
+            </p>
             <form id="signUpForm" class="space-y-4">
                 <div>
                     <label for="name" class="block text-gray-700 mb-2">Full Name *</label>
@@ -631,32 +634,34 @@
             const modal = document.getElementById('signUpModal');
             const modalContent = modal.querySelector('.modal-content');
             const signUpButtons = document.querySelectorAll('.btn-primary');
-            const closeModal = document.querySelector('.close-modal');
-            const form = document.getElementById('signUpForm');
             
             // Store the initial form HTML for resetting
             const initialFormHTML = modalContent.innerHTML;
+
+            // Function to attach close button event listener
+            function attachCloseHandler() {
+                const closeModal = modalContent.querySelector('.close-modal');
+                closeModal.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    // Reset modal content after it's closed
+                    setTimeout(() => {
+                        modalContent.innerHTML = initialFormHTML;
+                        attachCloseHandler();
+                        attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
+                    }, 300);
+                });
+            }
 
             signUpButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     if (button.textContent.trim().includes('Sign Up')) {
                         // Reset modal content before showing
                         modalContent.innerHTML = initialFormHTML;
+                        attachCloseHandler();
+                        attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
                         modal.classList.add('active');
-                        
-                        // Reattach submit event listener to new form
-                        const newForm = modalContent.querySelector('#signUpForm');
-                        attachFormSubmitHandler(newForm);
                     }
                 });
-            });
-
-            closeModal.addEventListener('click', () => {
-                modal.classList.remove('active');
-                // Reset modal content after it's closed
-                setTimeout(() => {
-                    modalContent.innerHTML = initialFormHTML;
-                }, 300);
             });
 
             window.addEventListener('click', (e) => {
@@ -665,6 +670,8 @@
                     // Reset modal content after it's closed
                     setTimeout(() => {
                         modalContent.innerHTML = initialFormHTML;
+                        attachCloseHandler();
+                        attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
                     }, 300);
                 }
             });
@@ -712,16 +719,9 @@
                                 <p class="text-gray-600">We will contact you soon.</p>
                             </div>
                         `;
-
-                        // Add event listener to new close button
-                        const newCloseButton = modalContent.querySelector('.close-modal');
-                        newCloseButton.addEventListener('click', () => {
-                            modal.classList.remove('active');
-                            // Reset modal content after it's closed
-                            setTimeout(() => {
-                                modalContent.innerHTML = initialFormHTML;
-                            }, 300);
-                        });
+                        
+                        // Reattach close handler to new close button
+                        attachCloseHandler();
 
                     } catch (error) {
                         console.error('Error:', error);
@@ -736,12 +736,16 @@
                                 <p class="text-gray-600 mt-2">Please try again later.</p>
                             </div>
                         `;
+                        
+                        // Reattach close handler to error message close button
+                        attachCloseHandler();
                     }
                 });
             }
 
-            // Attach submit handler to initial form
-            attachFormSubmitHandler(form);
+            // Initial attachment of event handlers
+            attachCloseHandler();
+            attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
         });
     </script>
 </body>
