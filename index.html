@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIMATE-WISE Exercise PROJECT</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Prevent horizontal scroll */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+        .btn-primary {
+            background-color: #c1121f;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #780000;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+        .btn-secondary {
+            background-color: white;
+            color: #c1121f;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #f8f8f8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .gradient-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2));
+        }
+        .section-title {
+            color: #2d3748;
+            font-weight: bold;
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 3rem;
+            display: inline-block;
+            transform: none;
+            left: auto;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: #c1121f;
+            border-radius: 2px;
+        }
+        .title-container {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .section-warm {
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-warm::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(193, 18, 31, 0.1), transparent);
+        }
+        .section-cool {
+            background-color: #f8fafc;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-cool::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(193, 18, 31, 0.1), transparent);
+        }
+        .highlight-text {
+            color: #c1121f;
+        }
+        .team-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .faq-item button {
+            transition: all 0.3s ease;
+        }
+        .faq-item button:hover {
+            background-color: #f1f5f9;
+        }
+        .contact-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+        }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 70%;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 50;
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .mobile-menu {
+                display: block;
+            }
+            .desktop-menu {
+                display: none;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: #000;
+        }
+
+        .loading {
+            position: relative;
+            opacity: 0.8;
+            cursor: wait;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin: -10px 0 0 -10px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center bg-black">
+        <!-- Background Ribbon -->
+        <div class="absolute top-0 left-0 w-full h-32 bg-black bg-opacity-30 z-10"></div>
+        
+        <!-- Logo and Project Name -->
+        <div class="absolute top-4 left-4 flex items-center z-20">
+            <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-20 md:h-32 w-auto -mr-4">
+            <span class="text-white text-xl md:text-2xl font-bold">HeatBeat</span>
+        </div>
+        
+        <!-- Navigation -->
+        <button class="hamburger absolute top-6 right-4 z-30 p-2">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16"></path>
+            </svg>
+        </button>
+
+        <!-- Mobile Menu -->
+        <nav class="mobile-menu z-40">
+            <div class="flex flex-col space-y-6">
+                <a href="#project" class="text-white hover:text-[#c1121f] transition-colors text-lg">About</a>
+                <a href="#join" class="text-white hover:text-[#c1121f] transition-colors text-lg">FAQ</a>
+                <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors text-lg">Contact Us</a>
+                <a href="#join" class="btn-primary px-4 py-2 rounded-full text-lg text-center">Join Study</a>
+            </div>
+        </nav>
+
+        <!-- Desktop Menu -->
+        <nav class="desktop-menu absolute top-4 right-0 p-4 flex items-center space-x-8 z-20">
+            <a href="#project" class="text-white hover:text-[#c1121f] transition-colors">About</a>
+            <a href="#join" class="text-white hover:text-[#c1121f] transition-colors">FAQ</a>
+            <a href="#contact" class="text-white hover:text-[#c1121f] transition-colors">Contact Us</a>
+            <a href="#join" class="btn-primary px-4 py-2 rounded-full transition-colors">Join Study</a>
+        </nav>
+
+        <div class="absolute inset-0 w-full h-full">
+            <div class="absolute inset-0 gradient-overlay z-10"></div>
+            <img src="back3.jpg" alt="Background Image" class="w-full h-full object-cover opacity-95 brightness-125">
+            <div class="absolute bottom-4 right-4 text-white text-sm opacity-70 z-20">
+                *Background image generated by AI
+            </div>
+        </div>
+        <div class="relative z-10 text-center text-white px-4 mt-16 md:mt-0">
+            <h1 class="text-3xl md:text-5xl font-bold mb-6 text-shadow">CLIMATE-WISE EXERCISE PROJECT</h1>
+            <p class="text-lg md:text-xl mb-8 text-shadow">Shaping the Future of Exercise in a Warming World</p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <button onclick="scrollToSection('project')" class="btn-secondary px-6 md:px-8 py-3 rounded-full text-lg transition-colors">
+                    About Project
+                </button>
+                <button onclick="scrollToSection('join')" class="btn-primary px-6 md:px-8 py-3 rounded-full text-lg transition-colors">
+                    Join Study
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Section -->
+    <section id="project" class="py-20" style="background-color: #fff;">
+        <div class="container mx-auto px-4">
+            <div class="title-container">
+                <h2 class="text-3xl section-title">About the Project</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="grid grid-rows-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">The Challenge</h3>
+                        <p class="text-gray-700 text-justify">
+                            Have you noticed how your regular running route feels harder on hot days? Or how your usual workout leaves you more exhausted during summer? You're not alone. As our climate changes, we need to adapt how we stay active - but current fitness apps and training programs haven't caught up with this new reality.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">The Reality</h3>
+                        <p class="text-gray-700 text-justify">
+                            Our warming world isn't just changing the environment - it's transforming how our bodies respond to exercise. When you exercise in heat, your body faces a double challenge: managing the stress from the workout itself while also trying to keep cool. Yet most fitness technology treats every day the same, regardless of the temperature outside.
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-rows-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">Our Research</h3>
+                        <p class="text-gray-700 text-justify">
+                            The HeatBeat project, a collaboration between the <a href="https://dhp.lbg.ac.at/?lang=en" target="_blank" class="text-blue-600 hover:underline">Ludwig Boltzmann Institute for Digital Health and Prevention (LBI)</a> and <a href="https://www.plus.ac.at/?lang=en" target="_blank" class="text-blue-600 hover:underline">Paris Lodron University Salzburg (PLUS)</a>, studies how environmental heat affects exercise performance. We combine multiple aspects of exercise science: physiological monitoring, environmental factors, and contextual elements. Our research focuses on real-world exercise situations, not just laboratory conditions, because we know that's where the real challenge lies.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#c1121f]">The Vision</h3>
+                        <p class="text-gray-700 text-justify">
+                            Our research examines the relationship between heat stress and exercise to develop better activity guidelines for warmer conditions. These findings can also enhance digital health applications, enabling them to provide personalized, heat-adapted exercise recommendations. By integrating environmental data and individual responses, future fitness technology can help people stay active safely, even as temperatures rise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration Strap -->
+    <section class="py-8" style="background-color: #f8fafc;">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <p class="text-gray-700 text-lg font-semibold mb-6">
+                    This project is a collaborative research initiative between
+                </p>
+                <div class="grid grid-cols-1 md:flex md:flex-row items-center justify-center gap-16 md:gap-12">
+                    <a href="https://dhp.lbg.ac.at/?lang=en" target="_blank" 
+                       class="transform hover:scale-105 transition-transform duration-300">
+                        <img src="lbi.svg" 
+                             alt="Ludwig Boltzmann Institute Logo" 
+                             class="h-16 w-auto mx-auto">
+                    </a>
+                    <a href="https://www.plus.ac.at/?lang=en" target="_blank"
+                       class="transform hover:scale-105 transition-transform duration-300">
+                        <img src="plus_logo.jpg" 
+                             alt="Paris Lodron University Salzburg Logo" 
+                             class="h-28 w-auto mx-auto">
+                    </a>
+                    <a href="https://www.pmu.ac.at/" target="_blank"
+                       class="transform hover:scale-105 transition-transform duration-300">
+                        <img src="pmu_logo.png" 
+                             alt="Paracelsus Medical University Logo" 
+                             style="height: 200px; width: auto; margin: 0 auto;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Study Section with FAQ -->
+    <section id="join" class="py-20" style="background-color: #fff;">
+        <div class="container mx-auto px-4">
+            <div class="title-container">
+                <h2 class="text-3xl section-title">Join the Study</h2>
+            </div>
+            
+            <p class="text-gray-700 text-center max-w-3xl mx-auto mb-12 text-lg">
+                By participating in this study, you're contributing to research that will help shape how we exercise in a changing climate. Together, we can find better ways to keep people exercising safely and confidently, regardless of the temperature outside.
+            </p>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Items -->
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">Who is eligible to participate?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">You are eligible if you:</p>
+                        <p class="mb-2">• Are at least 18 years old</p>
+                        <p class="mb-2">• Live in Europe</p>
+                        <p class="mb-2">• Are proficient in English</p>
+                        <p class="mb-2">• Own a Garmin watch</p>
+                        <p class="mb-2">• Own a smartphone (iOS or Android)</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What's involved?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">• Respond to daily surveys (<1 minute each)</p>
+                        <p class="mb-2">• Share data from your smartphone</p>
+                        <p class="mb-2">• Share data from your Garmin smartwatch</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">How long will the study last?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">The study runs from August 1st to August 31st, 2025.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What will I receive?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">By participating, you'll receive a detailed report on your personal exercise patterns, including insights into how heat and environmental conditions affect your performance. At the same time, you'll be advancing research on exercise in our changing climate.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What about data privacy?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">We take your privacy seriously:</p>
+                        <p class="mb-2">• All data is anonymized and stored securely</p>
+                        <p class="mb-2">• Compliant with GDPR regulations</p>
+                        <p class="mb-2">• Used only for research purposes</p>
+                        <p class="mb-2">• You can drop out of the study and request data deletion at any time</p>
+                    </div>
+                </div>
+
+                <div class="faq-item mb-4">
+                    <button class="w-full bg-gray-50 hover:bg-gray-100 p-4 rounded-lg flex justify-between items-center">
+                        <span class="font-semibold text-lg">What if I change my mind?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer hidden bg-white p-4 rounded-b-lg border-t">
+                        <p class="mb-2">Participation in this research is completely voluntary. You can withdraw from the study at any time, request deletion of your data, and face no negative consequences for doing so.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12 text-center bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-bold mb-4">Ready to Join?</h3>
+                    <button class="btn-primary px-8 py-3 rounded-full text-lg transition-colors">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20" style="background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);">
+        <div class="container mx-auto px-4">
+            <div class="title-container">
+                <h2 class="text-3xl section-title">Contact Us</h2>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center">
+                    <p class="text-gray-700 mb-4">For any questions about the study, please reach out to us at:</p>
+                    <p class="text-gray-700 text-lg">
+                        <i class="fas fa-envelope mr-2 text-[#c1121f]"></i>
+                        rania.islambouli@dhp.lbg.ac.at
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Ribbon -->
+    <footer class="relative bg-black bg-opacity-20 py-2">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="heatbeat2.jpg" alt="HeatBeat Logo" class="h-16 md:h-20 w-auto -mr-4">
+                    <span class="text-white text-xl font-bold">HeatBeat</span>
+                </div>
+                <a href="https://dhp.lbg.ac.at/?lang=en" target="_blank" class="transform hover:scale-105 transition-transform duration-300">
+                    <img src="lbi.svg" alt="Ludwig Boltzmann Institute Logo" class="h-12 w-auto">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="text-2xl font-bold mb-4 text-center">Sign Up for the Study</h2>
+            <p class="text-gray-700 mb-6 text-sm">
+                If you are interested in participating in our study, please enter your details and relevant information below and we will contact you with more details. Data that you enter in this form will be handled in accordance with the <a href="https://lbg.ac.at/data-protection/?lang=en" target="_blank" class="text-blue-600 hover:underline">Data Protection Policy of the LBG</a> and will be stored for reporting purposes for up to three years.
+            </p>
+            <form id="signUpForm" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-700 mb-2">Full Name *</label>
+                    <input type="text" id="name" name="name" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1121f]">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 mb-2">Email Address *</label>
+                    <input type="email" id="email" name="email" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1121f]">
+                </div>
+                <div>
+                    <label for="age" class="block text-gray-700 mb-2">Age *</label>
+                    <input type="number" id="age" name="age" min="18" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1121f]">
+                </div>
+                <div>
+                    <label for="country" class="block text-gray-700 mb-2">Country of Residence *</label>
+                    <input type="text" id="country" name="country" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1121f]">
+                </div>
+                <div>
+                    <label for="garmin" class="block text-gray-700 mb-2">Garmin Watch Model *</label>
+                    <input type="text" id="garmin" name="garmin" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c1121f]">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Do you have a smartphone? *</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="smartphone" value="yes" required class="mr-2">
+                            Yes, I have a smartphone
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="smartphone" value="no" required class="mr-2">
+                            No, I don't have a smartphone
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Are you proficient in English? *</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="english" value="yes" required class="mr-2">
+                            Yes, I am proficient in English
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="english" value="no" required class="mr-2">
+                            No, I am not proficient in English
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Are you willing to participate in the study from August 1st to August 31st, 2025? *</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="participate" value="yes" required class="mr-2">
+                            Yes, I am willing to participate
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="participate" value="no" required class="mr-2">
+                            No, I am not willing to participate
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="w-full btn-primary px-6 py-3 rounded-full text-lg mt-6">
+                    Submit
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // FAQ functionality
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const button = item.querySelector('button');
+            const answer = item.querySelector('.faq-answer');
+            const icon = item.querySelector('i');
+
+            button.addEventListener('click', () => {
+                const isOpen = answer.classList.contains('hidden');
+                
+                // Close all other answers
+                document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+                document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
+                
+                // Toggle current answer
+                if (isOpen) {
+                    answer.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    answer.classList.add('hidden');
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            hamburger.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                });
+            });
+        });
+
+        // Modal functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('signUpModal');
+            const modalContent = modal.querySelector('.modal-content');
+            const signUpButtons = document.querySelectorAll('.btn-primary');
+            
+            // Store the initial form HTML for resetting
+            const initialFormHTML = modalContent.innerHTML;
+
+            // Function to attach close button event listener
+            function attachCloseHandler() {
+                const closeModal = modalContent.querySelector('.close-modal');
+                closeModal.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    // Reset modal content after it's closed
+                    setTimeout(() => {
+                        modalContent.innerHTML = initialFormHTML;
+                        attachCloseHandler();
+                        attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
+                    }, 300);
+                });
+            }
+
+            signUpButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (button.textContent.trim().includes('Sign Up')) {
+                        // Reset modal content before showing
+                        modalContent.innerHTML = initialFormHTML;
+                        attachCloseHandler();
+                        attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
+                        modal.classList.add('active');
+                    }
+                });
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    // Reset modal content after it's closed
+                    setTimeout(() => {
+                        modalContent.innerHTML = initialFormHTML;
+                        attachCloseHandler();
+                        attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
+                    }, 300);
+                }
+            });
+
+            function attachFormSubmitHandler(form) {
+                form.addEventListener('submit', async e => {
+                    e.preventDefault();
+                    
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.classList.add('loading');
+                    submitButton.textContent = 'Submitting...';
+                    
+                    const formData = {
+                        timestamp: new Date().toISOString(),
+                        name: form.name.value,
+                        email: form.email.value,
+                        age: form.age.value,
+                        country: form.country.value,
+                        garmin: form.garmin.value,
+                        smartphone: form.smartphone.value,
+                        english: form.english.value,
+                        participate: form.participate.value
+                    };
+
+                    try {
+                        await fetch('https://script.google.com/macros/s/AKfycby4DNe5nqHu7ziBjtCr6aHSbSeySApwJsD-6ViVI0yvLrg34V4MkwR5VKbnwXDc8ZvyMA/exec', {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            cache: 'no-cache',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(formData)
+                        });
+
+                        // Replace form with success message
+                        modalContent.innerHTML = `
+                            <span class="close-modal">&times;</span>
+                            <div class="text-center py-8">
+                                <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Thank you for your interest in participating in our study!</h2>
+                                <p class="text-gray-600">We will contact you soon.</p>
+                            </div>
+                        `;
+                        
+                        // Reattach close handler to new close button
+                        attachCloseHandler();
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                        modalContent.innerHTML = `
+                            <span class="close-modal">&times;</span>
+                            <div class="text-center py-8">
+                                <svg class="w-16 h-16 text-red-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                <h2 class="text-2xl font-bold mb-4 text-gray-800">Submission Error</h2>
+                                <p class="text-gray-600">There was an error submitting your application.</p>
+                                <p class="text-gray-600 mt-2">Please try again later.</p>
+                            </div>
+                        `;
+                        
+                        // Reattach close handler to error message close button
+                        attachCloseHandler();
+                    }
+                });
+            }
+
+            // Initial attachment of event handlers
+            attachCloseHandler();
+            attachFormSubmitHandler(modalContent.querySelector('#signUpForm'));
+        });
+    </script>
+</body>
+</html>
